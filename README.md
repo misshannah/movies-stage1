@@ -14,8 +14,10 @@ An app to allow users to discover the most popular movies playing.
 * Allow the user to tap on a movie poster and transition to a details screen with additional information such as, original title or movie poster image thumbnail.
 * A plot synopsis (called overview in the api) and user rating (called vote_average in the api)
 
-# API Used
-* https://www.themoviedb.org/
+# API Key Used
+* Create an API Key here: https://www.themoviedb.org/settings/api/request
+Once you obtain your key, you append it to the HTTP request as a URL parameter e.g
+http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
 
 # References
 * http://mateoj.com/2015/10/06/creating-movies-app-retrofit-picasso-android/
