@@ -23,8 +23,6 @@ public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
     private LayoutInflater mInflater;
     private Context mContext;
 
-
-
     public MovieAdapter(Context context)
     {
         this.mContext = context;
@@ -45,8 +43,8 @@ public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
     public void onBindViewHolder(HomePage.MovieViewHolder holder, int position)
     {
         Movie movie = mMovieList.get(position);
-        String image_path = "https://image.tmdb.org/t/p/w500/";
-        String imageUrl = image_path + mMovieList.get(position).getPoster();
+        String image_path = mContext.getString(R.string.image_base_url);
+        String imageUrl = image_path + movie.getPoster();
         // This is how we use Picasso to load images from the internet.
         Picasso.with(mContext)
                 .load(imageUrl)
@@ -54,9 +52,6 @@ public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
                 .into(holder.imageView);
     }
 
-    public String getSimilarPosters() {
-        return "http://t2.gstatic.com/images?q=tbn:ANd9GcQW3LbpT94mtUG1PZIIzJNxmFX399wr_NcvoppJ82k7z99Hx6in";
-    }
     @Override
     public int getItemCount()
     {

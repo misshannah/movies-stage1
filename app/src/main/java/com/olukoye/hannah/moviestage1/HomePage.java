@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.olukoye.hannah.moviestage1.databinding.ActivityHomePageBinding;
 
@@ -29,6 +30,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        isOnline();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_page);
 
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -64,7 +66,22 @@ public class HomePage extends AppCompatActivity {
             }
         });
     }
+    //To verify internet connection is available
+    public Boolean isOnline() {
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            boolean reachable = (returnVal==0);
+            Toast.makeText(getApplicationContext(), "Connected to the Internet!", Toast.LENGTH_SHORT).show();
 
+            return reachable;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        Toast.makeText(getApplicationContext(), "Check Internet connection!", Toast.LENGTH_SHORT).show();
+        return false;
+    }
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
@@ -73,7 +90,7 @@ public class HomePage extends AppCompatActivity {
 
         {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            imageView = itemView.findViewById(R.id.imageView);
         }
     }
 }
