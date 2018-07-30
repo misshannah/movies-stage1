@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MovieStage1</string>
+    <string name="appbar_scrolling_view_behavior">scroll</string>
+</resources>
