@@ -1,5 +1,6 @@
 package com.olukoye.hannah.moviestage1;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.app.AppCompatActivity;
@@ -41,7 +42,13 @@ public class HomePage extends AppCompatActivity {
         for (int i = 0; i < 25; i++) {
             movies.add(new Movie());
         }
+
+
+
         mAdapter.setMovieList(movies);
+
+
+        //Using the retrofit library
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(getString(R.string.movie_url_base))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -91,6 +98,7 @@ public class HomePage extends AppCompatActivity {
         {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
+
         }
     }
 }

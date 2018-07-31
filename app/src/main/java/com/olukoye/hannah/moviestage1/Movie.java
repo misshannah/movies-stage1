@@ -19,6 +19,8 @@ public class Movie {
     private String title;
     @SerializedName("backdrop_path")
     private String backdrop;
+    @SerializedName("vote_average")
+    private String rating;
 
     public String getTitle() {
         return title;
@@ -49,6 +51,15 @@ public class Movie {
     public void setBackdrop(String backdrop) {
         this.backdrop = backdrop;
     }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
 
     public static class PopularMovieResult {
             private List<Movie> results;

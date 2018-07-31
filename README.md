@@ -11,8 +11,7 @@ An app to allow users to discover the most popular movies playing.
 
 * Present the user with a grid arrangement of movie posters upon launch.
 * Allow your user to change sort order via a setting. i.e. The sort order can be by most popular or by highest-rated
-* Allow the user to tap on a movie poster and transition to a details screen with additional information such as, original title or movie poster image thumbnail.
-* A plot synopsis (called overview in the api) and user rating (called vote_average in the api)
+* Allow the user to tap on a movie poster and transition to a details screen with additional information such as, original title or movie poster image thumbnail, a plot synopsis (called overview in the api) and user rating (called vote_average in the api)
 
 # API Key Used
 * Create an API Key here: https://www.themoviedb.org/settings/api/request

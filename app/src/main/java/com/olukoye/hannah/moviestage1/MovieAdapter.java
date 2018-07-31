@@ -1,7 +1,9 @@
 package com.olukoye.hannah.moviestage1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -36,20 +39,34 @@ public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
     {
         View view = mInflater.inflate(R.layout.row_layout, parent, false);
         HomePage.MovieViewHolder viewHolder = new HomePage.MovieViewHolder(view);
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(HomePage.MovieViewHolder holder, int position)
     {
-        Movie movie = mMovieList.get(position);
+        final Movie movie = mMovieList.get(position);
         String image_path = mContext.getString(R.string.image_base_url);
-        String imageUrl = image_path + movie.getPoster();
+        final String imageUrl = image_path + movie.getPoster();
         // This is how we use Picasso to load images from the internet.
         Picasso.with(mContext)
                 .load(imageUrl)
                 .placeholder(R.color.colorAccent)
                 .into(holder.imageView);
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Open Movie details", String.valueOf(movie.getDescription()));
+                Intent openPoster = new Intent(mContext, PosterDetails.class);
+                openPoster.putExtra("title", movie.getTitle());
+                openPoster.putExtra("description",movie.getDescription());
+                openPoster.putExtra("rating",movie.getRating());
+                openPoster.putExtra("posterurl",imageUrl);
+                mContext.startActivity(openPoster);
+            }
+        });
     }
 
     @Override
