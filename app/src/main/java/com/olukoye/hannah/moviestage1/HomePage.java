@@ -9,6 +9,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -42,8 +45,6 @@ public class HomePage extends AppCompatActivity {
         for (int i = 0; i < 25; i++) {
             movies.add(new Movie());
         }
-
-
 
         mAdapter.setMovieList(movies);
 
@@ -100,5 +101,31 @@ public class HomePage extends AppCompatActivity {
             imageView = itemView.findViewById(R.id.imageView);
 
         }
+    }
+    //Show Settings Menu
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // bring up the settings dialog if the settings menu option is selected
+        int id = item.getItemId();
+        if (id == R.id.action_popular) {
+            popularOrder();
+            return true;
+        }
+        if (id == R.id.action_rating) {
+            ratingOrder();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void ratingOrder() {
+
+    }
+    private void popularOrder() {
+
     }
 }
