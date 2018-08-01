@@ -5,6 +5,7 @@
 
     <ImageView
         android:id="@+id/imageView"
+        android:contentDescription="@string/movie_thumbnail"
         android:layout_width="@dimen/image_width"
         android:layout_height="@dimen/image_height"
         android:adjustViewBounds="true"/>

@@ -1,13 +1,10 @@
 package com.olukoye.hannah.moviestage1;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,9 +25,9 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class HomePage extends AppCompatActivity {
-    MovieAdapter mAdapter;
-    ActivityHomePageBinding binding;
-    List<Movie> movies;
+    private MovieAdapter mAdapter;
+    private ActivityHomePageBinding binding;
+    private List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,20 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
-
-
-/**
- * Created by hannaholukoye on 30/07/2018.
- */
 
 public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
 {

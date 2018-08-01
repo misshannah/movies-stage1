@@ -18,7 +18,10 @@ An app to allow users to discover the most popular movies playing.
 * Create an API Key here: https://www.themoviedb.org/settings/api/request
 Once you obtain your key, you append it to the HTTP request as a URL parameter e.g
 http://api.themoviedb.org/3/movie/popular?api_key=[YOUR_API_KEY]
+For this project, you will insert it on the strings.xml file i.e
+<string name="movie_api_key">[YOUR_API_KEY]</string>
+
 
 # References
 * http://mateoj.com/2015/10/06/creating-movies-app-retrofit-picasso-android/
-* http://mateoj.com/2015/10/07/creating-movies-app-retrofit-picass-android-part2/
+* http://mateoj.com/2015/10/07/creating-movies-app-retrofit-picasso-android-part2/

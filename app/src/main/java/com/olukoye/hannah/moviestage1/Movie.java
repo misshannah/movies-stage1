@@ -4,12 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by hannaholukoye on 30/07/2018.
- */
 
 public class Movie {
-    // To get image we use https://image.tmdb.org/t/p/w500/kqjL17yufvn9OVLyXYpvtyrFfak.jpg
 
 
     @SerializedName("poster_path")
