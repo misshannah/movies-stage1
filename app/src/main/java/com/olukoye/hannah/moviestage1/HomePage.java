@@ -30,6 +30,7 @@ import retrofit.client.Response;
 public class HomePage extends AppCompatActivity {
     MovieAdapter mAdapter;
     ActivityHomePageBinding binding;
+    List<Movie> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +41,98 @@ public class HomePage extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mAdapter = new MovieAdapter(this);
         binding.recyclerView.setAdapter(mAdapter);
-        final List<Movie> movies = new ArrayList<>();
+        movies = new ArrayList<>();
 
         for (int i = 0; i < 25; i++) {
             movies.add(new Movie());
         }
 
         mAdapter.setMovieList(movies);
+        popularOrder();
+    }
 
+    //To verify internet connection is available
+    public Boolean isOnline() {
+        try {
+            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int returnVal = p1.waitFor();
+            boolean reachable = (returnVal == 0);
+            Toast.makeText(getApplicationContext(), "Connected to the Internet!", Toast.LENGTH_SHORT).show();
 
-        //Using the retrofit library
+            return reachable;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        Toast.makeText(getApplicationContext(), "Check Internet connection!", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+        public ImageView imageView;
+
+        public MovieViewHolder(View itemView)
+
+        {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imageView);
+
+        }
+    }
+
+    //Show Settings Menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // bring up the settings dialog if the settings menu option is selected
+        int id = item.getItemId();
+        if (id == R.id.action_popular) {
+            popularOrder();
+            return true;
+        }
+        if (id == R.id.action_rating) {
+            ratingOrder();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void ratingOrder() {
+        //Using the retrofit library for top rated movies
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint(getString(R.string.movie_url_base))
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        request.addEncodedQueryParam("api_key", getString(R.string.movie_api_key));
+                        request.addEncodedQueryParam("language", getString(R.string.en_language));
+                        request.addEncodedQueryParam("sort_by", getString(R.string.sort_by_date));
+                    }
+                })
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        RatedMoviesInterfaceApi sortRating = restAdapter.create(RatedMoviesInterfaceApi.class);
+        sortRating.getTopRatedMovies(new Callback<Movie.RatedMovieResult>() {
+            @Override
+            public void success(Movie.RatedMovieResult movieResult, Response response) {
+                mAdapter.setMovieList(movieResult.getRatedResults());
+                Log.i("rating output", movies.toString());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });
+    }
+
+    private void popularOrder() {
+        //Using the retrofit library for popular movies
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(getString(R.string.movie_url_base))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -73,59 +156,6 @@ public class HomePage extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-    }
-    //To verify internet connection is available
-    public Boolean isOnline() {
-        try {
-            Process p1 = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
-            int returnVal = p1.waitFor();
-            boolean reachable = (returnVal==0);
-            Toast.makeText(getApplicationContext(), "Connected to the Internet!", Toast.LENGTH_SHORT).show();
-
-            return reachable;
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-        Toast.makeText(getApplicationContext(), "Check Internet connection!", Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
-        public ImageView imageView;
-
-        public MovieViewHolder(View itemView)
-
-        {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
-
-        }
-    }
-    //Show Settings Menu
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // bring up the settings dialog if the settings menu option is selected
-        int id = item.getItemId();
-        if (id == R.id.action_popular) {
-            popularOrder();
-            return true;
-        }
-        if (id == R.id.action_rating) {
-            ratingOrder();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    private void ratingOrder() {
-
-    }
-    private void popularOrder() {
 
     }
 }

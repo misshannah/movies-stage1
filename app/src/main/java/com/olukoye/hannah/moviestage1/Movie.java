@@ -68,4 +68,13 @@ public class Movie {
                 return results;
             }
     }
+
+    public static class RatedMovieResult {
+        private List<Movie> results;
+
+        public List<Movie> getRatedResults() {
+            return results;
+        }
+    }
+
 }

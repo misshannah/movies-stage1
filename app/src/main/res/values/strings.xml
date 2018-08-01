@@ -10,4 +10,6 @@
     <string name="sort_popular">Most Popular</string>
     <string name="sort_rating">Best Rated</string>
     <string name="sort_title">Select Sort Order</string>
+    <string name="sort_by_date">created_at.asc</string>
+    <string name="en_language">en-US</string>
 </resources>

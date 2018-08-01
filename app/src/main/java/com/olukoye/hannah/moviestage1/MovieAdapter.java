@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,7 +54,6 @@ public class MovieAdapter extends RecyclerView.Adapter<HomePage.MovieViewHolder>
         // This is how we use Picasso to load images from the internet.
         Picasso.with(mContext)
                 .load(imageUrl)
-                .placeholder(R.color.colorAccent)
                 .into(holder.imageView);
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
