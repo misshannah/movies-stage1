@@ -2,7 +2,7 @@
     <string name="app_name">MovieStage1</string>
     <string name="appbar_scrolling_view_behavior">scroll</string>
     <string name="movie_url_base">"http://api.themoviedb.org/3"</string>
-    <string name="movie_api_key"></string>
+    <string name="movie_api_key">[YOUR_API_KEY]</string>
     <string name="image_base_url">"https://image.tmdb.org/t/p/w500/"</string>
     <string name="movie_rating">Rating</string>
     <string name="movie_title_and_year">Title and year</string>
