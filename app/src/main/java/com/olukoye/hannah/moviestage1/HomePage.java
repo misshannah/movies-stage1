@@ -1,5 +1,6 @@
 package com.olukoye.hannah.moviestage1;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,7 +36,16 @@ public class HomePage extends AppCompatActivity {
         isOnline();
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home_page);
 
-        binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        //binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+
+        binding.recyclerView.setHasFixedSize(true);
+        if(binding.recyclerView.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else if (binding.recyclerView.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        }
+
+
         mAdapter = new MovieAdapter(this);
         binding.recyclerView.setAdapter(mAdapter);
         movies = new ArrayList<>();
